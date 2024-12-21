@@ -1,0 +1,30 @@
+# Ignore Python virtual environment
+env/
+
+# Ignore compiled files and cache
+__pycache__/
+
+# Ignore database files
+*.db
+
+# Ignore Visual Studio and C# generated files
+bin/
+obj/
+*.user
+*.suo
+*.cache
+
+# Ignore build outputs
+*.exe
+*.dll
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore commands file
+commands.txt

@@ -1,0 +1,111 @@
+﻿<Window x:Class="ChatAppFrontend.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatAppFrontend"
+        mc:Ignorable="d"
+        Title="ChatApp" Height="450" Width="800">
+    <Grid Margin="20">
+        <!-- Title -->
+        <TextBlock Text="ChatApp" 
+                   Style="{StaticResource TitleTextBlock}" 
+                   Margin="0,0,0,10">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                     From="0" To="1" Duration="0:0:2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+
+        <!-- Chat Display -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ListBox Name="ChatDisplay" 
+                     SelectionMode="Single"
+                     Background="White" 
+                     BorderThickness="0"
+                     Margin="0,50,0,100"
+                     ItemsSource="{Binding}"
+                     SelectionChanged="ChatDisplay_SelectionChanged">
+                <!-- Chat Bubble Template -->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Border Background="{Binding BackgroundColor}" 
+                                    CornerRadius="15" 
+                                    Padding="10" 
+                                    MaxWidth="300"
+                                    HorizontalAlignment="{Binding Alignment}">
+                                <TextBlock Text="{Binding Message}" 
+                                           Foreground="{Binding ForegroundColor}" 
+                                           FontFamily="pack://application:,,,/Fonts/#Quicksand"
+                                           FontSize="14"
+                                           TextWrapping="Wrap" />
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+
+        <!-- Delete Button -->
+        <Button Name="DeleteButton" 
+            Content="🗑" 
+            Width="30" 
+            Height="30"
+            Background="Transparent"
+            BorderThickness="0"
+            ToolTip="Delete selected message"
+            Visibility="Collapsed"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Margin="0,10,10,0" 
+            Click="DeleteButton_Click" />
+
+
+
+        <!-- Message Input -->
+        <TextBox Name="MessageInput" 
+                 Style="{StaticResource RoundedTextBox}" 
+                 Height="40" 
+                 Margin="0,0,120,0" 
+                 VerticalAlignment="Bottom"
+                 KeyDown="MessageInput_KeyDown"
+                 KeyUp="MessageInput_KeyUp"/>
+
+        <!-- Send Button -->
+        <Button x:Name="SendButton"
+                Content="Send" 
+                Style="{StaticResource AnimatedRoundedButton}" 
+                ToolTip="Click to send your message!"
+                Width="100" 
+                Height="40" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Click="SendButton_Click" />
+        
+        <!-- Refresh Button -->
+        <Button Name="RefreshButton"
+        Content="🔄"
+        ToolTip="Refresh Messages"
+        Width="30" 
+        Height="30"
+        FontSize="16"
+        FontFamily="pack://application:,,,/Fonts/#Quicksand"
+        Background="Transparent"
+        Foreground="#6B7280"
+        BorderThickness="0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Margin="10,10,0,0"
+        Cursor="Hand"
+        Click="RefreshButton_Click"/>
+
+
+    </Grid>
+</Window>
